@@ -25,3 +25,7 @@
 
 * 开发环境：`https://vuejs.org/js/vue.js`
 * 生产环境：`https://vue.js.org/js/vue.min.js`
+
+### NPM安装
+
+* 后续通过webpack和Cli的使用，我们使用这种方式。
