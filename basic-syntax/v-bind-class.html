@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-bind指令</title>
+
+  <style>
+    .active {
+      color: red;
+    }
+    .highlight {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <p :class="{active: isActive, highlight: isHighlight}">这是一条消息</p>
+    <p :class="cssClasses">这是一条消息</p>
+  </div>
+
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        isActive: true,
+        isHighlight: false,
+      },
+      computed: {
+        cssClasses: function() {
+          return {active: this.isActive, highlight: this.isHighlight}
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue list</title>
+</head>
+<body>
+  <div id="app">
+    不带有索引的遍历
+    <ul>
+      <li v-for="item in movies">{{item}}</li>
+    </ul>
+    带有索引的遍历
+    <ul>
+      <li v-for="(item, i) in movies">Index: {{i}}, {{item}}</li>
+    </ul>
+  </div>
+
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        movies: ["盗梦空间", "肖申克的救赎", "飞越疯人院"]
+      }
+    })
+  </script>
+</body>
+</html>

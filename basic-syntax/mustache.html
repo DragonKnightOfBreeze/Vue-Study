@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mustache</title>
+</head>
+<body>
+  <div id="app">
+    <p>{{message}}</p>
+    <p>hello, {{message}}!</p>
+    <p>hello, {{message}}! {{name}}.</p>
+    <p>{{message + name}}</p>
+    <p>{{message * 2}}</p>
+  </div>
+
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        message: "world",
+        name: "Windea"
+      }
+    })
+  </script>
+</body>
+</html>

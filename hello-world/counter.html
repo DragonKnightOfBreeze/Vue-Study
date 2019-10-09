@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Counter</title>
+</head>
+<body>
+  <div id="app">
+    {{message}}
+    <p>Count: {{count}}</p>
+    <!--"v-on:"可以缩写成"@"，事件值是vue表达式，其中的方法调用可以不写括号-->
+    <button @click="inc">+</button>
+    <button @click="dec">-</button>
+  </div>
+
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    new Vue({
+      el: "#app", //挂载要管理的元素
+      data: { //定义数据
+        count: 0
+      },
+      methods: {
+        inc: function() {
+          this.count++ //需要添加this调用
+        },
+        dec: function() {
+          this.count--
+        }
+      }
+    })
+  </script>
+</body>
+</html>

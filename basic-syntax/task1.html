@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task 1</title>
+
+  <style>
+    .active {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <!--作业需求：点击列表项，文字变成红色-->
+  <div id="app">
+    <ul>
+      <li v-for="(movie, index) in movies">
+        <span :class="{active: active(index)}" @click="activeOnClick(index)">{{movie}}</span>
+      </li>
+    </ul>
+  </div>
+
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        indexOnClick: -1,
+        movies: ["死神", "火影忍者", "海贼王", "进击的巨人"]
+      },
+      methods: {
+        activeOnClick(index) {
+          this.indexOnClick = index
+        },
+        active(index) {
+          return index === this.indexOnClick
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-bind:class指令</title>
+</head>
+<body>
+  <div id="app">
+    <a :href="url">百度一下</a>
+  </div>
+
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        url: "https://www.baidu.com"
+      }
+    })
+  </script>
+</body>
+</html>
