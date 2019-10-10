@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>事件监听</title>
+</head>
+<body>
+  <div id="app">
+    <button @click="btn1Click()">btnA</button>
+    <button @click="btn1Click">btnB</button>
+    <button @click="btn2Click($event)">btnC</button>
+    <button @click="btn2Click">btnD</button>
+    <button @click="btn3Click($event, 123)">btnE</button>
+  </div>
+
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      methods: {
+        btn1Click() {
+          console.log("btn1Click");
+        },
+        btn2Click(event) {
+          console.log("btn2Click");
+          console.log(event.target);
+        },
+        btn3Click(event, num) {
+          console.log(`btn3Click ${num}`);
+          console.log(event.target)
+        }
+      }
+    });
+
+    function test() {
+      [].splice()
+    }
+  </script>
+</body>
+</html>

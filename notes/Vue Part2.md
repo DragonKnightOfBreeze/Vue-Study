@@ -90,7 +90,6 @@
 * `destroyed`
 * `errorCaptured`
 
-
 # 基础语法
 
 ## mustache
@@ -128,5 +127,90 @@
     * 绑定事件。
     * 完整写法是`v-on:xxx`，缩写是`@xxx`。
 
-# 计算属性
+## 计算属性
 
+* 对数据进行转化后进行演示，或者进行合并后进行演示。
+* 计算属性要写在`computed`里面。而且要写成方法形式。调用时不要添加括号。
+* 和方法的不同：会对结果进行缓存。
+* 一般只提供getter，必要情况下也可以提供setter。
+
+## v-on的基本用法和语法糖
+
+* 前缀：`v-on:`
+* 前缀缩写：`@`
+* 值：Function | Inline Statement | Object
+* 参数：`event`
+    * 如果方法定义时没有参数，那么方法调用时不需要加括号。
+    * 如果方法定义时有一个参数，那么方法调用时会默认将原生事件对象`event`参数传递进去。这是要省略括号。
+    * 如果需要同时传递其他参数，同时传入event时，可以通过`$event`传入原生事件对象。
+
+修饰符：
+* `.stop` 调用`event.stopPropagation()`，阻止事件冒泡
+* `.prevent` 调用`event.preventDefault()`，阻止默认事件
+* `.{KeyCode | KeyAlias}` 只当事件是从特点键触发时才触发回调
+* `.native` 监听组件根元素的原生事件
+* `.once` 只触发一次监听
+
+## v-if, v-else-if, v-else的使用
+
+* `v-if`等 当满足条件时渲染。
+* `v-show` 当满足条件时显示。
+
+## v-for的使用
+
+* `in`可被替换成`of`
+* `v-for="item in items"`
+* `v-for="(item, index) in items"`
+* `v-for="value in map"`
+* `v-for="(value, key) in map"`
+* `v-for="(value, key, index) in map"`
+
+`v-for`同级的`:key`属性：为了更高效地使用虚拟dom。
+
+## 数组中哪些方法是响应式的
+
+* `Array.push(...)`：添加为最后的元素
+* `Array.pop(...)`：删除最后的元素
+* `Array.shift(...)`：删除开头的元素
+* `Array.unshift(...)`：添加为开头的元素
+* `Array.splice(...)`：删除或替换指定所用范围的元素
+* `Array.sort(...)`：排序
+* `Array.reverse(...)`：倒置
+* `Vue.set(array, index, newValue)`
+
+## Javascript高阶函数的使用
+
+> 不如Kotlin
+
+* `Collection.map(...)`
+* `Collection.foreach(...)`
+* `Collection.reduce(...)`
+* `Collection.flatMap(...)`
+* `Collection.filter(...)`
+* ...
+
+## v-model的双向绑定
+
+* 当表单输入元素拥有`v-model`属性时，不需要再添加`name`属性，大部分情况下不需要添加`value`属性。
+* 值绑定：动态给拥有多个选项的表单输入元素的`value`属性赋值。 
+
+v-model指令的修饰符
+* `.lazy` 懒绑定，在失去焦点或回车时再进行更新。
+* `.number` 固定类型为数字。
+* `.trim` 去除首位空格 。
+
+
+# 组件化开发
+
+## Vue组件化思想
+
+* 组件化是Vue.js中的重要思想
+    * 它提供了一种抽象，让我们可以开发出一个个独立可复用的小组件来构造我们的应用。
+    * 任何的应用都会被抽象成一颗组件树。
+
+## 注册组件的基本步骤
+
+* 组件的使用分成三个步骤：
+    * 创建组件的构造器。调用`Vue.extend()`创建。
+    * 注册组件。调用`Vue.component()`注册。
+    * 使用组件。在Vue实例的作用域范围内使用组件。

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Computed data</title>
+</head>
+<body>
+  <div id="app">
+    <p>{{message1}}, {{message2}}!</p>
+    <p>{{fullMessage}}</p>
+  </div>
+
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        message1: "hello",
+        message2: "world"
+      },
+      computed: {
+        fullMessage() {
+          return `${this.message1}, ${this.message2}!`
+        },
+        qualifiedMessage2: {
+          get() {
+            return `${this.message2}!`
+          },
+          set(newValue) {
+            this.message2 = newValue
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

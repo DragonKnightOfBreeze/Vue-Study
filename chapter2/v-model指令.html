@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <form>
+      <input type="text" v-model="message"/>
+      <input type="radio" v-model="gender"/>
+      <div>
+        <label v-for="h in allHobbies" :key="h" :for="h">
+          <input type="checkbox" :id="h" v-model="hobbies" :value="h"/>{{h}}
+        </label>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        message: "Hello world",
+        gender: "男",
+        hobbies: [],
+        allHobbies: ["唱", "跳", "rap", "打篮球"]
+      }
+    })
+  </script>
+</body>
+</html>

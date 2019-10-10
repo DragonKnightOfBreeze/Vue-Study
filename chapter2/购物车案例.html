@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>购物车案例</title>
+</head>
+<body>
+  <div id="app">
+    <table>
+      <thead>
+      <tr>
+        <th>书籍编号</th>
+        <th>书籍名称</th>
+        <th>书籍价格</th>
+        <th>购买数量</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="(book, index) in books">
+        <td>{{book.id}}</td>
+        <td>{{book.name}}</td>
+        <td>{{book.price | qualified}}</td>
+        <td>
+          <button @click="decPrice()" :disabled="disableDecPrice()">-</button>
+          {{book.count}}
+          <button @click="incPrice()">+</button>
+        </td>
+        <td>
+          <button @click="deleteBook()">移除</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <h4>总价格：{{totalPrice | qualified}}</h4>
+  </div>
+
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        books: [
+          {id: 1, name: "哈利波特与魔法石", price: 20, count: 0},
+          {id: 2, name: "哈利波特与密室", price: 25, count: 0},
+          {id: 3, name: "哈利波特与阿兹卡班的囚徒", price: 30, count: 0},
+          {id: 4, name: "哈利波特与火焰杯", price: 35, count: 0},
+          {id: 5, name: "哈利波特与凤凰社", price: 40, count: 0},
+          {id: 6, name: "哈利波特与混血王子", price: 50, count: 0},
+          {id: 7, name: "哈利波特与死亡圣器", price: 60, count: 0}
+        ]
+      },
+      computed: {
+        totalPrice() {
+          return this.books.map(book => book.price).reduce((a, b) => a + b)
+        }
+      },
+      methods: {
+        incPrice(index) {
+          this.books[index].count++
+        },
+        decPrice(index) {
+          this.books[index].count--
+        },
+        disableDecPrice(index) {
+          return this.books[index].count <= 0
+        },
+        deleteBook(index) {
+          this.books.splice(index, 1)
+        }
+      },
+      filters: {
+        qualified(value) {
+          return "￥" + value.toFixed(2)
+        }
+      }
+    });
+  </script>
+</body>
+</html>
