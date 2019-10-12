@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+
+  </div>
+
+  <!--必须指定为这种类型-->
+  <script type="text/x-template" id="helloWorld">
+    <div>Hello world!</div>
+  </script>
+
+  <template id="helloWorld2">
+    <div>Hello world!</div>
+  </template>
+
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    //使用html模版声明全局组件
+    Vue.component("hello-world", "#helloWorld");
+
+    //使用template标签声明全局组件
+    Vue.component("hello-world", "#helloWorld2");
+
+    new Vue({
+      el: "#app",
+      data: {},
+      methods: {}
+    });
+  </script>
+</body>
+</html>

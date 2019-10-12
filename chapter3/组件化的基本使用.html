@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <hello-world></hello-world>
+  </div>
+
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    //创建组件构造器
+    const helloWorld = Vue.extend({
+      template: `<div>Hello world!</div>`
+    });
+
+    //注册组件
+    Vue.component("hello-world", helloWorld);
+
+    //使用组件（在html中）
+
+    new Vue({
+      el: "#app",
+      data: {},
+      methods: {}
+    });
+  </script>
+</body>
+</html>

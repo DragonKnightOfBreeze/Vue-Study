@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Vue Study.iml" filepath="$PROJECT_DIR$/Vue Study.iml" />
-      <module fileurl="file://$PROJECT_DIR$/chapter2/basic-syntax.iml" filepath="$PROJECT_DIR$/chapter2/basic-syntax.iml" />
-      <module fileurl="file://$PROJECT_DIR$/chapter1/hello-world.iml" filepath="$PROJECT_DIR$/chapter1/hello-world.iml" />
     </modules>
   </component>
 </project>

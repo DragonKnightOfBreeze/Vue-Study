@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <hello-parent></hello-parent>
+  </div>
+
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    const helloChild = Vue.extend({
+      template: `<div>Hello child!</div>`
+    });
+
+    const helloParent = Vue.extend({
+      template: `
+      <div>
+        <div>Hello parent!</div>
+        <hello-child></hello-child>
+      </div>
+      `,
+      components: {
+        helloChild
+      }
+    });
+
+    new Vue({
+      el: "#app",
+      components: {
+        helloParent
+      }
+    });
+  </script>
+</body>
+</html>
