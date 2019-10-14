@@ -1,0 +1,10 @@
+{
+  "name": "chapter4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "devDependencies": {
+    "css-loader": "^3.2.0"
+  }
+}

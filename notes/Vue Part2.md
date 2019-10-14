@@ -365,8 +365,6 @@ let {a, b} = require("./sample.js")
 * 花括号中的是解构语法。
 * 导入路径对应的文件是js文件时，后缀名可省略。
 
-
-
 ## webpack的介绍和安装
 
 * 从本质上来讲，webpack是一个现代的Javascript应用的静态打包工具。
@@ -384,3 +382,47 @@ let {a, b} = require("./sample.js")
 
 webpack安装
 * 首先需要安装node.js，自带软件包管理工具npm。
+
+## webpack的基本使用
+
+* src 源码，需要通过webpack打包到dist
+* dist->distribution 最终发布的代码
+
+## webpack.config.js和package.json的配置
+
+* 打包项目：`npm run build`
+* 运行项目：`npm run serve`
+
+局部安装webpack
+* 项目中需要安装自己局部的webpack。
+* 通过node-modules/.bin/webpack启动webpack打包。
+
+package.json中定义启动
+* 在`scripts`属性中定义脚本。
+* 执行时，首先会寻找本地的`node_modules/bin`路径中对应的命令。
+* 如果没有找到，则会到全局的环境变量中去寻找。
+
+## webpack中使用css文件的配置
+
+什么是loader
+* loader是webpack中一个非常核心的概念。
+* webpack用来做什么
+    * 在开发中除了基本的js代码之外，还需要加载图片，以及转化ts、less等。
+    * 对于webpack本身来说，对于这些转化是不支持的。
+    * 这时就需要扩展对应的loader。
+* loader的使用步骤
+    * 通过npm安装对应的loader
+    * 在webpack.config.js的modules关键字下面进行配置。 
+
+
+# vue-router
+
+# vuex
+
+# 网络封装
+
+# 项目实战
+
+# 项目部署
+
+# vuejs原理
