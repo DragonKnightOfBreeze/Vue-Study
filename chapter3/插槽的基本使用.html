@@ -6,23 +6,30 @@
 </head>
 <body>
   <div id="app">
-    <hello-world></hello-world>
+    <cpn></cpn>
+    <cpn>
+      <button>按钮</button>
+    </cpn>
   </div>
+
+  <template id="cpn">
+    <div>
+      <p>Hello world!</p>
+      <slot></slot>
+    </div>
+  </template>
 
   <script src="https://vuejs.org/js/vue.js"></script>
   <script>
-    //全局注册语法糖
-    Vue.component("hello-world", {
-      template: `<div>Hello world!</div>`
-    });
-
-    //创建组件构造器
-
     new Vue({
       el: "#app",
       data: {},
       methods: {},
-      components: {} //局部注册语法糖类似全局注册语法糖
+      components: {
+        cpn: {
+          template: "#cpn"
+        }
+      }
     });
   </script>
 </body>

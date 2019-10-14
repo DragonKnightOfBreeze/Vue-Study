@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <!--  目的 获取子组件中的languages-->
+    <template #default="languages">
+      <span v-for="language in languages">* {{language}}</span>
+    </template>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <slot :data="languages">
+        <ul>
+          <li v-for="language in languages">{{language}}</li>
+        </ul>
+      </slot>
+    </div>
+  </template>
+
+  <script>
+    new Vue({
+      el: "#app",
+      data: {},
+      methods: {},
+      components: {
+        cpn: {
+          template: "#cpn",
+          data() {
+            return {
+              languages: ["Javascript", "Typescript", "Java", "Kotlin"]
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <hello-parent @child-click="btnClick"></hello-parent>
+  </div>
+
+  <template id="helloChild">
+    <div>Hello child!</div>
+  </template>
+
+  <template id="helloParent">
+    <div>
+      <div>Hello parent!</div>
+      <hello-child></hello-child>
+    </div>
+  </template>
+
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    const helloChild = Vue.extend({
+      template: "#helloChild",
+      data() {
+        return {
+          categories: [
+            "物理",
+            "化学",
+            "生物"
+          ]
+        }
+      },
+      methods: {
+        btnClick(item) {
+          //发射世事件，事件类型是自定义的
+          this.$emit("child-click", this.categories);
+        }
+      }
+    });
+
+    const helloParent = Vue.extend({
+      template: "#helloParent",
+      components: {
+        helloChild
+      },
+      methods: {
+        //当省略参数调用时，将会默认传递在子组件对应自定义事件中携带的数据
+        btnClick(item) {
+          console.log(item)
+        }
+      }
+    });
+
+    new Vue({
+      el: "#app",
+      components: {
+        helloParent
+      }
+    });
+  </script>
+</body>
+</html>

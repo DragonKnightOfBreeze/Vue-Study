@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <hello-world :mesage="message" :fruits="fruits"></hello-world>
+  </div>
+
+  <template id="helloWorld">
+    <div>
+      <div>Hello world!</div>
+      <div>{{message}}</div>
+      <ul>
+        <li v-for="fruit in fruits">{{fruit}}</li>
+      </ul>
+    </div>
+  </template>
+
+  <script src="https://vuejs.org/js/vue.js"></script>
+  <script>
+    const helloWorld = {
+      template: "#helloWorld",
+      // props:[
+      //   "message",
+      //   "fruits"
+      // ]
+      props: {
+        message: {
+          type: String,
+          default: "Hello",
+          required: false //如果为true，则必须传递，否则vue报错
+        },
+        fruits: Array
+      }
+    };
+
+    new Vue({
+      el: "#app",
+      components: {
+        helloWorld
+      },
+      data: {
+        message: "Hi",
+        fruits: ["香蕉", "苹果", "葡萄"]
+      },
+      methods: {}
+    });
+  </script>
+</body>
+</html>

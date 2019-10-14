@@ -287,4 +287,100 @@ $parent的使用
 
 $root的使用
 
-# 前端模块化
+## 插槽的使用
+
+为什么使用插槽
+* 组件的插槽让我们封装的组件更加具有扩展性
+* 让使用者可以决定组件内部的一些内容到底展示什么。
+
+***
+
+* 在组件模版中使用`slot`标签声明插槽的位置。
+* 可以在定义时在插槽里面添加内容，传入默认值。
+
+## 具名插槽
+
+* 在组件模版中使用显式的`name`属性声明插槽的名字。
+* 在使用时使用显式的`slot`属性区分插入的位置。
+
+## 编译的作用域
+
+* 父组件模版的所有东西都会在父级作用域内编译。
+* 子组件模版的所有东西都会在子级作用域内编译。
+
+## 作用域插槽
+
+* 目的：父组件提花插槽的标签，但是内容由子组件提供。
+* 在组件模版中使用`:data`属性传入需要传递的数据。
+* 在使用时使用`#xxx`来接受被传递的数据，`xxx`是插槽的名字，默认为default。
+* 接受传递的数据时，可以使用解构语法。
+
+# Vue CLI详解
+
+## 前端模块化
+
+* 问题：变量名冲突，脚本导入顺序，代码复用性。
+* 可以解决的方式：闭包/立即执行函数表达式。
+
+## 模块化雏形和CommonJS
+
+* 常见的模块化规范：CommonJS，AMD，CMD，ES6的modules。
+* CommonJS只是一个规范，具体的实现是node。
+
+CommonJS
+* 核心：导入和导出
+
+```
+//导出
+//sample.js
+module.exports= {
+  a: "123",
+  b: function(){}
+}
+
+//导出
+let {a, b} = require("./sample.js")
+```
+
+## ES模块化的导入和导出
+
+需要在引入时为`script`标签声明`type="module"`。
+
+导入
+* `export`指令
+    * `export let name="Windea"`
+    * `export {name, weapon}`
+* 可以导出变量、函数和类。
+* `export default`指令
+    * `export default "Windea"`
+* 一个文件中只能存在一个`export default`指令。
+
+导出
+* `import`指令
+    * `import {name} from "./script"`
+* `import default`指令
+    * `import name from "./script"`
+* `import as`指令
+    * `import * as aaa from "./script"` 
+* 花括号中的是解构语法。
+* 导入路径对应的文件是js文件时，后缀名可省略。
+
+
+
+## webpack的介绍和安装
+
+* 从本质上来讲，webpack是一个现代的Javascript应用的静态打包工具。
+* 核心是模块和打包。
+* 强调模块化开发处理。
+* 依赖于node环境。
+* 为了管理node包，需要使用npm。
+
+和grunt/gulp的对比
+* grunt/gulp的核心是Task
+* 我们可以配置一系列的task，并且定义task要处理的事务。
+* 之后让其依次执行这些task，而且让整个流程自动化。
+* 所有grunt/gulp也被称为前端自动化任务管理工具。
+* 强调前端流程的自动化。
+
+webpack安装
+* 首先需要安装node.js，自带软件包管理工具npm。
