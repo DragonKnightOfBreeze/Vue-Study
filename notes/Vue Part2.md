@@ -652,7 +652,7 @@ vue init webpack my-project
     * `history.forward()`
     * `history.back()`
 
-# 安装与使用vue-router
+## 安装与使用vue-router
 
 安装
 * `npm install --save vue-router`
@@ -664,6 +664,24 @@ vue init webpack my-project
 * 创建路由组件
 * 配置路由映射：组件与路由的映射关系。
 * 通过`router-link`和`router-view`标签使用路由。
+
+## router-link
+
+属性
+* `to` 指定需要转发到的路径，可为绝对可为相对。
+* `tag` 指定显示的格式。如`button`。
+* `replace` 使用`history.replaceState()`
+* `activeClass` 激活时需要添加的css class。也可以在路由配置中使用`linkActiveClass`配置。
+
+## 通过代码跳转路由
+
+* `this.$router.push(location)`
+* `this.$router.replace(location)`
+* `this.$router.go(n)`
+* `this.$router.forward()`
+* `this.$router.back()` 
+
+## 动态路由
 
 # vuex 
 
