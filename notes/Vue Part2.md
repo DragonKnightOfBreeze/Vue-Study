@@ -413,11 +413,259 @@ package.json中定义启动
 * loader的使用步骤
     * 通过npm安装对应的loader
     * 在webpack.config.js的modules关键字下面进行配置。 
+    * webpack从右向左读取loader。
 
+## webpack图片文件的处理
+
+* 加载图片使用url-loader或file-loader。
+* 图片没有正确显示出来，可能是图片路径不正确，需要添加关于`publicPath`的配置。
+
+options里面的name的选项
+* `img`：文件要打包到的文件夹。
+* `name`：获取文件原来的名字，放在该位置。
+* `hash:8`：为了防止命名冲突。可以指定截取的位数。
+* `ext`：使用图片原来的扩展名。
+
+## webpack ES6转ES5的babel
+
+* `npm install babel-loader@8.0.0-beta.0 @babel/core @babel/preset-es2015 webpack`
+* 配置webpack.config.js文件
+```
+{
+  test: /\.js$/,
+  exclude: /(node_modules|bower_components)/,
+  use: {
+    loader: 'babel-loader',
+    options: {
+      presets: ['es2015']
+    }
+  }
+}
+```
+* 重新打包，查看bundle.js文件，发现其中的内容变成了ES5的语法。
+
+## webpack 配置vue
+
+* `npm install --save vue`
+
+打包项目报错
+* runtime-only 代码中不允许有任何template
+* runtime-compiler 代码中可以有template
+* 解决方案：修改webpack的配置，添加如下内容
+```
+resolve: {
+  alias: {
+    "vue$": "vue/dist/vue.esm.js"
+  }
+}
+```
+
+## 创建Vue时template和el的关系
+
+* template会替换el。
+* `npm install --save-dev vue-loader vue-template-compiler`
+* 高版本的vue-loader需要安装插件。
+
+## webpack插件的使用
+
+loader和plugin的区别
+* loader主要用于转换某些类型的模块，它是一个转换器。
+* plugin是插件，是对webpack本身的扩展，是一个扩展器。
+
+plugin的使用过程
+* 通过npm安装需要使用的插件。
+* 在webpack.config.js的plugins中配置文件。
+
+## webpack BannerPlugin的使用
+
+* 用于生成版权信息。
+
+```
+const webpack = require("webpack");
+
+module.exports = {
+  /*...*/
+  plugins:[
+    new webpack.BannerPlugin("Copyright @DragonKnightOfBreeze")
+  ]
+}
+```
+
+## Webpack HtmlWebpackPlugin的使用
+
+* 可以自动生成一个index.html文件。（可以指定模版生成）
+* 将打包的js文件，自动通过script标签插入到body中。
+
+安装与使用
+* `npm install --save-dev html-webpack-plugin`
+* template表示根据什么模版来生成index.html。
+* 需要删除之前在output中添加的publicPath属性。
+* 否则插入的script标签中的src可能会有问题。
+
+```
+module.exports = {
+  /*...*/
+  plugins:[
+    new htmlWebpackPlugin({
+      template: "index.html"
+    })
+  ]
+}
+```
+
+## webpack UglifyJsWebpackPlugin的使用
+
+* 在项目发布之前，我们必然需要对js等文件进行压缩处理
+* 这里，我们就要对打包的js文件进行压缩
+
+安装和使用
+* `npm install --save-dev uglifyjs-webpack-plugin`
+* 修改webpack.config.js文件，使用插件。
+* 查看打包后的bundle.js文件，是已经被压缩过的了。
+
+```
+const uglifyJsPlugin = require("uglifyjs-webpack-plugin")
+
+module.exports = {
+  /*...*/
+  plugins: [
+    new uglifyJsPlugin()
+  ]
+}
+```
+
+## webpack-dev-server搭建本地服务器
+
+webpack提供了一个可选的本地开发服务器，这个服务器基于node.js搭建，内部使用express框架。
+
+> 开发阶段，不建议使用丑化js插件。
+
+安装和使用
+* `npm install --save-dev webpack-dev-server`
+* devServer也是webpack配置文件中的一个选项，有以下属性：
+    * contentBase：为哪一个文件夹提供本地服务，默认是根文件夹，我们这里需要填写`./dist`。
+    * port：端口号。
+    * inline：页面实时刷新。
+    * historyApiFallback：在SPA页面中，依赖html5的history模式。
+* 可以再配置另外一个script，`--open`表示直接打开浏览器：
+    * `"dev": "webpack-dev-server --open"`
+
+```
+devServer: {
+  contentBase: "./dist",
+  inline: true
+}
+```
+
+## webpack配置文件的分离
+
+* `npm install --save-dev webpack-merge`
+* 将配置分离为`base.config.js`、`prod.config.js`、`dev.config.js`
+* `prop.config.js`的编写示例：
+* 在`package.json`的script中指定配置文件：`--config ./prod.config.js`
+
+```
+const uglifyJsWebpackPlugin = require("uglifyjs-webpack-plugin");
+const webpackMerge = require("webpack-merge");
+const baseConfig = require("./base.config")
+
+module.exports= webpackMerge(baseConfig, {
+  plugins:[
+    new uglifyJsWebpackPlugin()
+  ]
+});
+```
+
+## Vue CLI脚手架的介绍和安装
+
+* CLI全称Command line interface，翻译为命令行接口，俗称脚手架。
+* Vue CLI是官方发布的vue.js项目脚手架。
+* 使用vue-cli可以快速搭建Vue开发环境以及对应的webpack配置。 
+
+Vue Cli使用前提：node
+
+Vue Cli3安装
+* `npm install -g @vue/cli`
+
+Vue CLI2初始化项目，拉取2.x模版
+```
+npm install -g @vue/cli init
+vue init webpack my-project
+```
+
+## runtime-compiler和runtime-only的区别
+
+* 如果在以后的开发中，仍然使用template，就要使用runtime-compiler。
+* 如果在以后的开发中，仅使用单组件文件开发，那么可以选择runtime-only。
+
+## Vue CLI2的安装和使用
+
+（略）
+
+## Vue CLI3的安装和使用
+
+版本之间的区别
+* vue-cli 3基于webpack4打造，vue-cli 2还是webpack3.
+* vue-cli 3的设计原则是0配置，移除了配置文件根目录下的build、config等目录。
+* vue-cli 3提供了vue ui命令，提供了可视化的配置，更加人性化。
+* 移除了static文件夹，新增了public文件夹，并且将index.html移动到public中。
+* 隐藏了许多东西。
+
+修改配置的方式
+* 启动配置服务器`vue ui`。
+
+> 箭头函数的this引用的是最近作用域的this。
 
 # vue-router
 
-# vuex
+## 什么是路由和其中的映射关系
+
+* 什么是路由
+    * 路由是一个网络工程中的术语。
+    * 路由就是通过互联的网络把信息从源地址传输到目标地址的活动。
+* 路由器提供了两种方式：路由和转发。
+    * 路由是决定数据包从来源到目的地的路径。
+    * 转发将输入端的数据转移到合适的输出端。
+* 路由中有一个非常重要的概念叫路由表
+    * 路由表本质上是一个映射表，决定了数据包 指向。
+
+什么是前端渲染，什么是后端渲染
+* 后端渲染
+    * 后端处理url和页面之间的映射关系。
+    * 后端路由有利于seo优化。
+* 前后端分离
+    * 后端只负责提供数据。
+* 前端渲染
+    * 浏览器中显示的大部分内容都是由js代码完成。
+* 单页面富应用阶段
+    * 最主要的特点就是在前后端分离的基础上加了一层前端路由。
+    * 一个前端路由对应一个前端页面。
+* 后端专注于数据，前端专注于交互和可视化。
+
+## url的hash和html5的history
+
+* 监听hash的改变
+* history相关方法
+    * `history.pushState(obj, title, url)`
+    * `history.replaceState(obj, title, url)`
+    * `history.go(num = 1)`
+    * `history.forward()`
+    * `history.back()`
+
+# 安装与使用vue-router
+
+安装
+* `npm install --save vue-router`
+* 导入路由器对象，并且调用`Vue.use(VueRouter)`
+* 创建路由实例，传入路由映射配置。
+* 在Vue实例中挂载创建的路由实例。
+
+使用
+* 创建路由组件
+* 配置路由映射：组件与路由的映射关系。
+* 通过`router-link`和`router-view`标签使用路由。
+
+# vuex 
 
 # 网络封装
 
