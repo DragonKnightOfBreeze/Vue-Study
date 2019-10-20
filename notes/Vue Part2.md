@@ -681,9 +681,83 @@ vue init webpack my-project
 * `this.$router.forward()`
 * `this.$router.back()` 
 
-## 动态路由
+## 路由的懒加载
 
-# vuex 
+官方的解释
+* 当打包构建应用时，javascript包会变得非常大，影响页面加载。
+* 如果我们能把不同路由对应的组件分割成不同的代码块，然后当路由被访问的时候才加载对应组件，这样就更加高效了。
+
+路由懒加载做了什么
+* 主要作用就是讲路由对应的组件打包成一个个小的js代码块。
+* 只有在这个路由被访问到的时候，才加载对应的组件。
+
+懒加载的方式
+* AMD：`const About = resolve => require(['../components/About.vue'], resolve);`
+* ES6：`const Home = () => import('./components/About.vue')`
+
+## 路由的嵌套
+
+* 在路由定义中使用`children`属性定义子路由。
+* 子路由的`name`属性不需要以斜线开头。
+* 存在子路由的路由，对应的组件页面需要添加`router-outlet`，且在跳转时需要使用完整绝对路径。
+
+## 参数传递
+
+传递参数主要有两种方式：params和query。
+
+* 传入参数
+    * `/user/:id`，`id`是一个参数。
+* 得到参数
+    * `this.$route.params.id`，`id`是一个参数。
+    * 在组件方法中使用。
+
+* 传入查询参数
+    * `/login?url=xxx`，`url`是一个查询参数。
+* 得到查询参数
+    * `this.$route.query.name`，`name`是一个查询参数。
+    * 在组件方法中使用。
+
+> URL的组成：
+> * `协议类型:[//[用户信息@]服务器:端口号][/资源层级UNIX文件路径]文件名[?查询][#片段ID]`
+> * `scheme:[//[userInfo@]host:port][/path]fileName[?query][#fragment]`
+
+## router和route的区别
+
+* 所有的组件都继承自Vue的原型。
+* `this.$router`和`this.$route`即使添加到Vue原型的方法。
+* `this.$router`为全局的、唯一的路由器实例。
+* `this.$route`是基于当前组件的当前路由实例。
+
+## 导航守卫
+
+* vue-router提供的导航守卫主要用来监听路由的进入和离开。
+* 通用的导航守卫回调：beforeEach、afterEach。
+* 路由独享的导航守卫回调：beforeEnter、afterEnter。
+* 组件内的导航守卫回调：beforeRouteEnter、beforeRouteUpdate、beforeRouteLeave。
+* vue-router
+  它们会在路由即将改变前和改变后触发。
+* 可以定义全局守卫、路由独享守卫和组件内守卫。
+
+* `next()`
+* `next(false)`
+* `next("/login")`
+* `next(error)`
+
+## keep-alive遇见vue-router
+
+* keep-alive是Vue内置的一个组件，可以使被包含的组件保留状态，避免重新渲染。
+* router-view也是一个组件，如果直接被包在keep-alive里面，
+  所有路径匹配到的视图组件都会被缓存。
+
+* 组件回调`activated`和`deactivated`：
+  只有当组件被keep-alive组件包围时才有效。
+
+重要的属性：
+* include：字符串或正则表达式，只有匹配的组件会被缓存。
+* exclude：字符串或表达式，任何匹配的组件都不会缓存。
+* 里面的组件名用逗号隔开，不要添加空格。
+
+# vuex
 
 # 网络封装
 
