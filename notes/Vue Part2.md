@@ -757,7 +757,72 @@ vue init webpack my-project
 * exclude：字符串或表达式，任何匹配的组件都不会缓存。
 * 里面的组件名用逗号隔开，不要添加空格。
 
+## 文件路径引用问题
+
+```
+//在dom中使用时，需要在别名路径前面添加"~"
+resolve: {
+  alias: {
+    "@"： resolve("src")
+  }
+}
+```
+
 # vuex
+
+## Promise语法
+
+* Promise是异步编程的一种解决方案。
+* 链式编程。
+
+什么情况下会用到Promise
+* 进行异步请求操作时。
+* new -> 构造函数（保存了一些状态信息，执行传入的参数）。
+* 构造参数中的resolve和reject回调是在内部执行的。
+* then是操作成功时的回调，catch是操作失败时的回调。
+
+```javascript
+new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("data");
+  }, 1000);
+  //reject("error message");
+}).then(value => {
+  //return Promise.resolve(value+"123");
+  return value + "123";
+}).then(value => {
+  console.log(value);
+}).then(value => {
+  //return Promise.reject("Error");
+  throw "Error";
+}).catch(reason => {
+  console.error(reason);
+}).finally(() => {
+  console.log("Finished.")
+});
+```
+
+Promise的三种状态
+* pending 等待状态。正在进行网络请求，或者定时器没有到时间。
+* fulfill 满足状态。当主动回调了resolve时。会回调then。
+* reject 拒绝状态。当主动回调了reject时。会回调catch。
+
+Promise all方法的使用
+* `Promise(promises)`
+* 当所有Promise都被解析成功时，创建一个解析成功的Promise，
+  否则创建一个拒绝的Promise。
+
+
+## vuex的概念和作用解析
+
+Vuex是一个专为vuejs应用程序开发的状态管理模式。
+* 采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态
+  以一种可预测 方式发生变化。
+* Vuex也继承到vue的官方调试工具devtools extension，提供了诸如零配置的
+  time-travel调试、状态快照导入导出等高级调试功能。
+
+状态管理
+* 把需要多个组件共享的变量全部存储在一个对象里面。
 
 # 网络封装
 
