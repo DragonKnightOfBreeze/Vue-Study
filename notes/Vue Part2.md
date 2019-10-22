@@ -845,7 +845,40 @@ Vuex是一个专为vuejs应用程序开发的状态管理模式。
 * 将共享的状态抽取出来，交给我们的大管家，统一进行管理。
 * 之后，每个试图，按照约定好的方式，进行访问和修改等操作。
 
-## Vuex state 单一状态树的理解
+## Mutations响应规则
+
+* vuex的store中的state是响应式的，当state中 数据发生改变时，vue组件会自动更新。
+* 必须遵守的规则
+    * 提前在store中初始化好所需的属性
+    * 当给state中的对象添加新的属性时，使用下面的方式
+        * 使用`Vue.set(obj, newPropName, newPropValue)`
+        * 用新对象给旧对象重新赋值。
+    * 当删除属性时，使用`Vue.delete(obj, propNme)`
+
+## Mutations类型常量
+
+> IDEA虽然不会对mutation名字作提示，但当名字正确时，会有高亮且可跳转。
+
+## 项目结构
+
+```
+api
+  ...
+components
+  ...
+views
+  ...
+store
+  index.ts
+router
+  index.ts
+  actions.ts
+  mutations.ts
+  modules
+    cart.js
+    products.js
+App.vue
+```
 
 # 网络封装
 
