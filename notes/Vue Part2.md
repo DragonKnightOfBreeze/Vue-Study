@@ -882,6 +882,79 @@ App.vue
 
 # 网络封装
 
+## 网络请求模块的选择-axios
+
+jsonp
+* 在前端开发中，我们一种常见的网络请求方式就是jsonp
+* 使用jsonp最主要的原因往往就是为了解决跨域访问的问题。
+* jsonp的原理
+    * 核心在于通过script标签的src来帮助我们请求数据。
+    * 封装jsonp的核心在于监听window上的jsonp进行回调时的名称。
+
+## axios框架的基本使用
+
+支持多种请求方式
+
+* `axios(config)`
+* `axios.request(config)`
+* `axios.get(url[, config])`
+* `axios.delete(url[, config])`
+* `axios.head(url[, config])`
+* `axios.post(url[, data[, config]])`
+* `axios.put(url[, data[, config]])`
+* `axios.patch(url[, data[, config]])`
+
+## axios发送并发请求
+
+* `axios.all(promises)` 放入多个请求的数组，返回一个数组。
+* `axios.spread((...)=>T)` 将promise数组展开为result1, result2。
+
+## axios全局配置
+
+```
+axios.defaults.url = "..."
+axios.defaults.method = "..."
+axios.defaults.params = {...}
+
+//作为每个请求url的前缀
+axios.defaults.baseURL = "..."
+//为每种请求设置公共的请求头 
+axios.defaults.headers.post["Content-Type"] = "..."
+//对请求前的数据进行转化处理
+axios.defaults.transformRequest = (data)=>{}
+//对请求后的数据进行转化处理
+axios.defaults.transformResponse = (data)=>{}
+//查询对象序列化函数
+axios.defaults.paramsSerializer = (params)=>{}
+//响应体
+axios.defaults.data = {}
+//超时设置（单位：秒）
+axios.defaults.timeout = 1000
+//跨域是否带token
+axios.defaults.withCredentials = false
+//自定义请求处理
+axios.defaults.adapter = (resolve,reject,config){}
+//身份验证信息
+axios.defaults.auth = {username: "...", password: "..."}
+//响应数据格式
+axios.defaults.responseType= "Json"
+```
+
+## axios实例和模块封装
+
+为什么要创建axios实例
+* 当我们从axios模块中导入对象时，使用的实例是默认的实例。
+* 当给该实例设置一些默认配置时，这些配置也就被固定下来了。
+* 但是后续开发中，某些配置可能不太一样。
+* 比如某些请求需要使用特定的baseURL或者timeout或者contentType等。
+* 这个时候，我们就可以创建新的实例，并且传入属于该实例的配置信息。
+
+为什么要对模块进行封装
+* 除非是核心的框架（例如SpringBoot，Vue）
+* 否则不要每个文件都对某个第三方库依赖。
+
+## axios拦截器的使用
+
 # 项目实战
 
 # 项目部署
