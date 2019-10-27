@@ -781,7 +781,7 @@ resolve: {
 * 构造参数中的resolve和reject回调是在内部执行的。
 * then是操作成功时的回调，catch是操作失败时的回调。
 
-```javascript
+```
 new Promise((resolve, reject) => {
   setTimeout(() => {
     resolve("data");

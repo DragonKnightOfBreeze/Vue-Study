@@ -1,8 +1,14 @@
 <template>
-  <div class="tab-bar-item" @click="itemClick">
-    <img v-if="!isActive" :src="iconUrl" alt="">
-    <img v-else :src="activeIconUrl" alt="">
-    <div :style="activeStyle">{{text}}</div>
+  <div id="tab-bar-item" @click="itemClick">
+    <div class="item-icon" v-show="!isActive">
+      <slot name="icon"></slot>
+    </div>
+    <div class="item-active-icon" v-show="isActive">
+      <slot name="active-icon"></slot>
+    </div>
+    <div class="item-text" :style="activeStyle">
+      <slot name="text"></slot>
+    </div>
   </div>
 </template>
 
@@ -10,54 +16,42 @@
   export default {
     name: "TabBarItem",
     props: {
-      text: String,
-      to: String,
-      iconUrl: String,
-      activeIconUrl: {
+      link: {
         type: String,
-        default: this.iconUrl
-      },
-      color: {
-        type: String,
-        default: "black"
-      },
-      activeColor: {
-        type: String,
-        default: "red"
+        required: true
       }
     },
     computed: {
       isActive() {
-        //判断当前路由的路径，是否包含该组件的路径
-        return this.$route.indexOf(this.path) !== -1
+        return this.$route.path.indexOf(this.link) !== -1
       },
       activeStyle() {
-        //当抽取activeColor时，需要动态绑定style而非class
-        return {color: this.isActive ? this.activeColor : this.color}
+        return this.isActive ? {'color': 'red'} : {}
       }
     },
     methods: {
       itemClick() {
-        this.$router.replace(this.to)
+        this.$router.replace(this.link)
       }
     }
   }
 </script>
 
 <style scoped>
-  .tab-bar-item {
-    font-size: 14px;
-
+  #tab-bar-item {
     flex: 1;
-    text-align: center;
-    height: 49px; /*较为合适的高度*/
   }
 
-  .tab-bar-item img {
+  .item-icon img, .item-active-icon img {
     width: 24px;
     height: 24px;
-    margin-top: 3px;
-    margin-bottom: 3px;
+    margin-top: 5px;
     vertical-align: middle;
+  }
+
+  .item-text {
+    font-size: 12px;
+    margin-top: 3px;
+    color: #333;
   }
 </style>

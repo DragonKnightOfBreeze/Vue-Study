@@ -1,30 +1,33 @@
 <template>
   <div id="app">
+    <keep-alive exclude="Detail">
+      <router-view></router-view>
+    </keep-alive>
     <main-tab-bar></main-tab-bar>
+    <icon></icon>
+    <svg-icon></svg-icon>
   </div>
 </template>
 
-<script lang="ts">
-  import MainTabBar from "@/components/content/MainTabBar.vue"
-  import Vue from "vue"
+<script>
+  import MainTabBar from '@/components/content/mainTabbar/MainTabBar'
+  import Icon from '@/components/content/Icon/Icon.vue'
+  import SvgIcon from '@/components/content/Icon/svg.vue'
 
-  export default Vue.extend({
-    name: "app",
+  export default {
+    name: 'app',
     components: {
       MainTabBar,
-    },
-  })
+      Icon,
+      SvgIcon
+    }
+  }
 </script>
 
 <style>
-  @import "assets/css/mormalize.css";
+  @import "assets/css/base.css";
 
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
+    position: relative;
   }
 </style>

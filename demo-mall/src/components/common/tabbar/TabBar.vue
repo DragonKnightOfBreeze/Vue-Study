@@ -1,32 +1,33 @@
 <template>
-  <div class="tab-bar">
+  <div id="tab-bar">
     <slot></slot>
   </div>
 </template>
 
 <script>
   export default {
-    name: "TabBar",
-    props: {}
+    name: "TabBar"
   }
 </script>
 
 <style scoped>
-  .tab-bar {
-    /*调整对齐*/
-    padding: 0;
-    margin: 0;
-
-    display: flex;
+  #tab-bar {
+    /* 本身的样式 */
     background-color: #f6f6f6;
+    height: 49px;
+    border-top: 1px solid #eee;
+    box-shadow: 0px -1px 1px rgba(150, 150, 150, .08);
 
-    /*调整位置*/
+    /* 定位相关 */
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
 
-    /*添加阴影*/
-    box-shadow: 0 -3px 2px rgba(100, 100, 100, 0.2);
+    /* 利用flex进行布局 */
+    display: flex;
+    text-align: center;
   }
 </style>
+
+
