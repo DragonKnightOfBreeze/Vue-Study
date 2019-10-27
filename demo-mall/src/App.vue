@@ -11,8 +11,8 @@
 
 <script>
   import MainTabBar from '@/components/content/mainTabbar/MainTabBar'
-  import Icon from '@/components/content/Icon/Icon.vue'
-  import SvgIcon from '@/components/content/Icon/svg.vue'
+  import Icon from '@/components/content/Icon/Icon'
+  import SvgIcon from '@/components/content/Icon/svg'
 
   export default {
     name: 'app',

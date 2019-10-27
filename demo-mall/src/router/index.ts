@@ -1,5 +1,6 @@
 import Cart from "@/views/cart/Cart.vue"
 import Category from "@/views/category/Category.vue"
+import Detail from "@/views/detail/Detail.vue"
 import Home from "@/views/home/Home.vue"
 import Profile from "@/views/profile/Profile.vue"
 import Vue from "vue"
@@ -17,7 +18,7 @@ const routes: RouteConfig[] = [
     component: Home,
     children: [],
   }, {
-    path: "category",
+    path: "/category",
     component: Category,
     children: [],
   }, {
@@ -25,8 +26,12 @@ const routes: RouteConfig[] = [
     component: Cart,
     children: [],
   }, {
-    path: "profile",
+    path: "/profile",
     component: Profile,
+    children: [],
+  }, {
+    path: "/detail",
+    component: Detail,
     children: [],
   },
 ]

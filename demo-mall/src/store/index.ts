@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    cartList: Array<any>,
+    cartList: Array<any>(),
   },
   getters: {
     cartCount(state, getters): number {

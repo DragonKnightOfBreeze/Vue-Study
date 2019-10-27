@@ -3,42 +3,46 @@
     <nav-bar class="nav-bar">
       <div slot="center">购物街</div>
     </nav-bar>
-    <tab-control v-show="isTabFixed" class="fixed" @itemClick="tabClick"
-                 :titles="['流行', '新款', '精选']"></tab-control>
-    <scroll class="content"
-            ref="scroll"
-            @scroll="contentScroll"
-            @pullingUp="loadMore"
-            :data="showGoodsList"
-            :pull-up-load="true"
-            :probe-type="3">
+    <tab-control
+        class="fixed"
+        v-show="isTabFixed"
+        @itemClick="tabClick"
+        :titles="['流行', '新款', '精选']"
+    ></tab-control>
+    <scroll
+        class="content"
+        ref="scroll"
+        @scroll="contentScroll"
+        @pullingUp="loadMore"
+        :data="showGoodsList"
+        :pull-up-load="true"
+        :probe-type="3"
+    >
       <div>
-        <home-swiper :banners="banners"
-                     ref="hSwiper"></home-swiper>
+        <home-swiper :banners="banners" ref="hSwiper"></home-swiper>
         <feature-view :features="recommends"></feature-view>
         <recommend-view></recommend-view>
-        <tab-control @itemClick="tabClick"
-                     :titles="['流行', '新款', '精选']"
-                     ref="tabControl"></tab-control>
+        <tab-control @itemClick="tabClick" :titles="['流行', '新款', '精选']" ref="tabControl"></tab-control>
         <goods-list :goods-list="showGoodsList"></goods-list>
       </div>
     </scroll>
     <back-top @backTop="backTop" class="back-top" v-show="showBackTop">
-      <img src="~assets/img/common/top.png" alt="">
+      <img src="/src/assets/img/common/top.png" alt="">
     </back-top>
   </div>
 </template>
 
 <script>
-  import NavBar from 'common/navbar/NavBar'
-  import Scroll from 'common/scroll/Scroll'
-  import TabControl from 'content/tabControl/TabControl'
-  import BackTop from 'content/backTop/BackTop'
+  import NavBar from '@/components/common/navbar/NavBar'
+  import Scroll from '@/components/common/scroll/Scroll.vue'
+  import TabControl from '@/components/content/tabControl/TabControl'
+  import BackTop from '@/components/content/backTop/BackTop'
   import HomeSwiper from './childComps/HomeSwiper'
   import FeatureView from './childComps/FeatureView'
   import RecommendView from './childComps/RecommendView'
   import GoodsList from './childComps/GoodsList'
-  import {BANNER, getHomeData, getHomeMultidata, RECOMMEND} from "network/home";
+
+  import {BANNER, getHomeData, getHomeMultiData, RECOMMEND} from "@/network/home";
   import {BACKTOP_DISTANCE, NEW, POP, SELL} from "@/common/const";
 
   export default {
@@ -83,10 +87,10 @@
       this.getHomeProducts(NEW)
       this.getHomeProducts(SELL)
     },
-    activated: function() {
+    activated() {
       this.$refs.hSwiper.startTimer()
     },
-    deactivated: function() {
+    deactivated() {
       this.$refs.hSwiper.stopTimer()
     },
     updated() {
@@ -94,6 +98,7 @@
       // console.log(this.tabOffsetTop);
     },
     methods: {
+      //事件监听相关方法
       tabClick(index) {
         switch(index) {
           case 0:
@@ -107,6 +112,7 @@
             break
         }
       },
+      //NOTE 如何按照滚动到的位置来显示动态组件
       contentScroll(position) {
         // 1.决定tabFixed是否显示
         this.isTabFixed = position.y < -this.tabOffsetTop
@@ -124,7 +130,7 @@
        * 网络请求相关方法
        */
       getMultiData() {
-        getHomeMultidata().then(res => {
+        getHomeMultiData().then(res => {
           this.banners = res.data[BANNER].list
           this.recommends = res.data[RECOMMEND].list
           // 下次更新DOM时,获取新的tabOffsetTop值(不保险,可以在updated钩子中获取)
@@ -139,6 +145,7 @@
           this.goodsList[type].list.push(...goodsList)
           this.goodsList[type].page += 1
 
+          //完成上拉，允许进行下一次上拉加载更多的回调
           this.$refs.scroll.finishPullUp()
         })
       }

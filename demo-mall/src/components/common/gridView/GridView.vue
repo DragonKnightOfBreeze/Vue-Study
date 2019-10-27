@@ -29,14 +29,14 @@
         default: 8
       }
     },
-    mounted: function() {
+    mounted() {
       setTimeout(this._autoLayout, 20)
     },
-    updated: function() {
+    updated() {
       this._autoLayout()
     },
     methods: {
-      _autoLayout: function() {
+      _autoLayout() {
         // 1.获取gridEl和children
         // 注: 这里为什么不用document.querySelector呢?
         // 答: 因为如果在项目中, 多处都用到了grid-view, 那么这里就不确定获取的是哪一个了.
@@ -66,6 +66,9 @@
 <style scoped>
   .grid-view {
     display: flex;
+    /*根据宽度决定一行中显示多少个*/
     flex-wrap: wrap;
+    /*均等分*/
+    justify-content: space-around;
   }
 </style>

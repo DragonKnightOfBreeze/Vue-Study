@@ -1,6 +1,6 @@
 <template>
   <nav-bar class="detail-nav">
-    <img slot="left" class="back" @click="backClick" src="~assets/img/common/back.svg">
+    <img slot="left" class="back" @click="backClick" src="/src/assets/img/common/back.svg">
     <div class="title" slot="center">
       <span class="title-item"
             v-for="(item, index) in titleInfos" :key="index"
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import NavBar from 'common/navbar/NavBar'
+  import NavBar from '@/components/common/navbar/NavBar'
 
   export default {
     name: "DetailNavBar",
@@ -32,7 +32,7 @@
       }
     },
     methods: {
-      itemClick: function(index) {
+      itemClick(index) {
         this.$emit('itemClick', index)
       },
       backClick() {

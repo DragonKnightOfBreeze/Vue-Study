@@ -25,7 +25,7 @@
 
     display: flex;
 
-    height: 44px;
+    height: 44px; /*没有内容时需要设置height*/
     line-height: 44px;
     text-align: center;
 

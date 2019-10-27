@@ -15,18 +15,18 @@
         default: true
       }
     },
-    data: function() {
+    data() {
       return {
         checked: this.value
       }
     },
     methods: {
-      selectItem: function() {
+      selectItem() {
         this.$emit('checkBtnClick')
       }
     },
     watch: {
-      value: function(newValue) {
+      value(newValue) {
         this.checked = newValue;
       }
     }

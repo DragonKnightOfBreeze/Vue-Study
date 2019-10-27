@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import Scroll from 'common/scroll/Scroll'
+  import Scroll from '@/components/common/scroll/Scroll'
   import CartListItem from './CartListItem'
 
   export default {

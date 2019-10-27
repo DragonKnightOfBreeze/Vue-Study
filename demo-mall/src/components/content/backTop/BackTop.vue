@@ -8,7 +8,7 @@
   export default {
     name: "BackTop",
     methods: {
-      topClick: function() {
+      topClick() {
         this.$emit('backTop');
       }
     }

@@ -18,13 +18,13 @@
     </scroll>
     <detail-bottom-bar @addToCart="addToCart"></detail-bottom-bar>
     <back-top @backTop="backTop" class="back-top" v-show="showBackTop">
-      <img src="~assets/img/common/top.png" alt="">
+      <img src="/src/assets/img/common/top.png" alt="">
     </back-top>
   </div>
 </template>
 
 <script>
-  import Scroll from 'common/scroll/Scroll'
+  import Scroll from '@/components/common/scroll/Scroll'
 
   import DetailNavBar from './childComps/DetailNavBar'
   import DetailSwiper from './childComps/DetailSwiper'
@@ -36,9 +36,9 @@
   import DetailRecommendInfo from './childComps/DetailRecommendInfo'
 
   import DetailBottomBar from './childComps/DetailBottomBar'
-  import BackTop from 'content/backTop/BackTop'
+  import BackTop from '@/components/content/backTop/BackTop'
 
-  import {getDetail, getRecommend, Goods, GoodsParam, Shop} from "network/detail";
+  import {getDetail, getRecommend, Goods, GoodsParam, Shop} from "@/network/detail";
   import {backTopMixin} from "@/common/mixin";
   import {BACKTOP_DISTANCE} from "@/common/const";
 

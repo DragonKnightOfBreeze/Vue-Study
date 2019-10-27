@@ -3,12 +3,12 @@ import axios from "axios"
 //NOTE 只能新建实例，哪能进行封装啊
 //那么多http请求方法，不可能一个个封装的
 
-const http$ = axios.create({
+const $http = axios.create({
   baseURL: "...",
   timeout: 36000
 })
 
-http$.interceptors.request.use(value => {
+$http.interceptors.request.use(value => {
   console.log("请求成功。")
   console.log(`Url: ${value.url}`);
   console.log(`Params: ${value.params}`)
@@ -26,7 +26,7 @@ http$.interceptors.request.use(value => {
 })
 
 
-http$.interceptors.response.use(value => {
+$http.interceptors.response.use(value => {
   console.log("响应成功。")
   console.log(`Data: ${value.data}`)
   //拦截之后可能需要再次放行

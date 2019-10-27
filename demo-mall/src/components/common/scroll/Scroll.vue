@@ -37,7 +37,13 @@
       __initScroll() {
         // 1.初始化BScroll对象
         if(!this.$refs.wrapper) return
-        this.scroll = new BScroll(this.$refs.wrapper, {
+        //ref="wrapper"
+        this.scroll = new BScroll(this.$refs["wrapper"], {
+          //默认情况下BScroll不可以实时监听滚动位置
+          //probeType 侦测类型
+          //0,1 不实时侦测
+          //2 滚动过程中侦测，后续惯性滚动过程中不侦测
+          //3侦测任何滚动过程
           probeType: this.probeType,
           click: true,
           pullUpLoad: this.pullUpLoad

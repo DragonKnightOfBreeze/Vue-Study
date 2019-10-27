@@ -24,12 +24,12 @@
           return preValue + item.count * item.newPrice
         }, 0).toFixed(2)
       },
-      isSelectAll: function() {
+      isSelectAll() {
         return this.$store.getters.cartList.find(item => item.checked === false) === undefined;
       }
     },
     methods: {
-      checkBtnClick: function() {
+      checkBtnClick() {
         // 1.判断是否有未选中的按钮
         let isSelectAll = this.$store.getters.cartList.find(item => !item.checked);
 

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import NavBar from 'common/navbar/NavBar'
+  import NavBar from '@/components/common/navbar/NavBar'
   import CartList from './childComps/CartList'
   import BottomBar from './childComps/BottomBar'
 

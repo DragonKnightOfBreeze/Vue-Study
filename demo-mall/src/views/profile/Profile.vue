@@ -37,14 +37,14 @@
 <script>
   import UserInfo from './childComps/UserInfo'
   import ListView from './childComps/ListView'
-  import NavBar from 'common/navbar/NavBar'
+  import NavBar from '@/components/common/navbar/NavBar'
 
   export default {
     name: "Profile",
     components: {
       UserInfo, ListView, NavBar
     },
-    data: function() {
+    data() {
       return {
         orderList: [
           {icon: '#order', iconColor: '#ff8198', info: '我的消息'},
@@ -57,7 +57,7 @@
         ]
       }
     },
-    mounted: function() {
+    mounted() {
     }
   }
 </script>

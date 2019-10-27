@@ -1,20 +1,20 @@
 import {NEW, POP, SELL} from "./const";
 
 export const backTopMixin = {
-  data: function() {
+  data() {
     return {
       showBackTop: false
     }
   },
   methods: {
-    backTop: function() {
+    backTop() {
       this.$refs.scroll.scrollTo(0, 0, 300);
     }
   }
 }
 
 export const tabControlMixin = {
-  data: function() {
+  data() {
     return {
       currentType: POP
     }
