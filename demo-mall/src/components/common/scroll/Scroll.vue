@@ -5,9 +5,10 @@
 </template>
 
 <script>
+  import Vue from "vue"
   import BScroll from 'better-scroll'
 
-  export default {
+  export default Vue.extend({
     name: "Scroll",
     props: {
       probeType: {
@@ -45,10 +46,12 @@
           //2 滚动过程中侦测，后续惯性滚动过程中不侦测
           //3侦测任何滚动过程
           probeType: this.probeType,
+          //NOTE 用来限制按钮以外的元素的点击
           click: true,
           pullUpLoad: this.pullUpLoad
         })
 
+        //NOTE 如何监听事件
         // 2.将监听事件回调
         this.scroll.on('scroll', pos => {
           this.$emit('scroll', pos)
@@ -75,7 +78,7 @@
         setTimeout(this.refresh, 20)
       }
     }
-  }
+  })
 </script>
 
 <style scoped>

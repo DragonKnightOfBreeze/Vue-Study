@@ -16,8 +16,7 @@
         @pullingUp="loadMore"
         :data="showGoodsList"
         :pull-up-load="true"
-        :probe-type="3"
-    >
+        :probe-type="3">
       <div>
         <home-swiper :banners="banners" ref="hSwiper"></home-swiper>
         <feature-view :features="recommends"></feature-view>
@@ -145,7 +144,7 @@
           this.goodsList[type].list.push(...goodsList)
           this.goodsList[type].page += 1
 
-          //完成上拉，允许进行下一次上拉加载更多的回调
+          //NOTE 完成上拉，允许进行下一次上拉加载更多的回调
           this.$refs.scroll.finishPullUp()
         })
       }
@@ -156,6 +155,7 @@
 <style scoped>
   #home {
     /*position: relative;*/
+    /*vh viewport height （浏览器）视图的高度*/
     height: 100vh;
   }
 
@@ -166,6 +166,7 @@
   }
 
   .content {
+    /*NOTE 必须要有固定的高度*/
     position: absolute;
     top: 44px;
     bottom: 49px;

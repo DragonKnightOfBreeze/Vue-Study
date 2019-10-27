@@ -45,11 +45,19 @@ main.js
 
 或者：使用`better-scroll`。
 * wrapper元素里面只能有一个子元素。 
-* 传入属性：
-    * overflow：是否显示滚动条
+* `overflow="hidden"`：不显示滚动条
 
 
 ## 切换列表时图片不切换的问题
 
 设置`v-for`对应的`:key`属性。
 
+## 拿不到`this.$refs`中的元素的问题
+
+* 不能在`created`中调用，必须在`mounted`中调用。
+* 因为那时dom还未加载完毕。
+* 为vue元素或者dom元素添加ref元素，然后即可通过`this.$refs`获取。
+
+## 原生事件
+
+* 当我们需要监听一个组件的原生点击事件时，必须加上`.native`修饰符。
