@@ -2,18 +2,20 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <Foo></Foo>
   </div>
 </template>
 
 <script lang="ts">
-  import Vue from 'vue';
-  import HelloWorld from './components/HelloWorld.vue';
-  import axios from 'axios'
+  import Foo from "@/components/Foo.vue"
+  import HelloWorld from "@/components/HelloWorld.vue"
+  import axios from "axios"
+  import Vue from "vue"
 
   export default Vue.extend({
-    name: 'app',
+    name: "app",
     components: {
-      HelloWorld
+      HelloWorld, Foo
     },
     methods: {
       //REGION 一般请求
